@@ -50,7 +50,6 @@ async def state_title(message: Message, state: FSMContext):
     await message.answer("введи текст zametky:")
 
 
-
 @dp.message(StateFilter(AddNoteStates.text))
 async def state_text(message: Message, state: FSMContext):
     text = message.text.strip()
@@ -113,6 +112,18 @@ async def cmd_delete(message: Message):
         await message.answer("ZAMETKA удалена")
     else:
         await message.answer("такой ZAMETKA нету")
+
+
+@dp.message(Command(commands=["help"]))
+async def cmd_help(message: Message):
+    await message.answer("""
+команды:
+/help - помощь
+/note - zametka
+/list - список
+/archive - сохранить
+/delete - удалить
+""")
 
 
 async def main():
